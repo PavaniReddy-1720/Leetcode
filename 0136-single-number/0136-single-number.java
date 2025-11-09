@@ -1,8 +1,33 @@
+import java.util.HashMap;
+/**
+i have done usng 3 methods 
+1.Bruteforce -> using Two For loops
+2.Hash Map -> 0(n)
+3.XOR operation -> but only when number repeat two times
+*/
+class Solution {
+    public int singleNumber(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        for (int num : map.keySet()) {
+            if (map.get(num) == 1) {
+                return num;
+            }
+        }
+        return -1;
+    }
+}
+
+
+
+
 /**
 Hi Pavani
 this code applies only when numbers repeat twice and thrice 
 since XOR cancels out if two numbera are same X^X=0
- */
+
 class Solution {
     public int singleNumber(int[] nums) {
         int res=0;
@@ -41,4 +66,3 @@ class Solution {
         return -1;
     }
 */
-    
