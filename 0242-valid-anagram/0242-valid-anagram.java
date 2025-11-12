@@ -32,3 +32,33 @@ class Solution {
     return true;
     }
 }
+
+/*
+BRUTEFORCE -> using sorting method
+
+
+import java.util.Arrays;
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        // Step 1: convert both strings to lowercase and remove spaces
+        s = s.toLowerCase().replace(" ", "");
+        t = t.toLowerCase().replace(" ", "");
+
+        // Step 2: if lengths differ → not an anagram
+        if (s.length() != t.length())
+            return false;
+
+        // Step 3: convert to char arrays
+        char[] sArr = s.toCharArray();
+        char[] tArr = t.toCharArray();
+
+        // Step 4: sort both arrays
+        Arrays.sort(sArr);
+        Arrays.sort(tArr);
+
+        // Step 5: compare sorted arrays
+        return Arrays.equals(sArr, tArr);
+    }
+}
+*/
