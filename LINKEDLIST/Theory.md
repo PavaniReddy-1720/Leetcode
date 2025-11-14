@@ -1,6 +1,7 @@
 Linked List – Theory
 
-A Linked List is a linear data structure in which elements, called nodes, are connected using pointers. Each node contains:
+A Linked List is a linear data structure in which elements, called nodes, are connected using pointers. 
+Each node contains:
 Data – stores the actual value.
 Pointer/Next – stores the reference/address of the next node in the sequence.
 
