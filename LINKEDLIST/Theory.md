@@ -30,12 +30,12 @@ Pointer Overhead: Managing pointers increases complexity.
     public class ListNode{
     
       public int val;
-      
       public ListNode next;
 
       public ListNode(int x){
         val=x;
       }
+      
       public static void main(String[] args){
           //creating nodes
           ListNode l1=new ListNode(4);
