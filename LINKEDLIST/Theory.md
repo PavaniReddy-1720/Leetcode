@@ -1,4 +1,5 @@
 Linked List – Theory
+
 A Linked List is a linear data structure in which elements, called nodes, are connected using pointers. Each node contains:
 Data – stores the actual value.
 Pointer/Next – stores the reference/address of the next node in the sequence.
@@ -11,8 +12,11 @@ Circular Linked List: Last node points back to the first node.
 Advantages of Linked List
 
 Dynamic Size: Can grow or shrink during runtime.
+
 Efficient Insertions/Deletions: No shifting of elements required.
+
 Better Memory Utilization: Allocates memory as needed.
+
 Flexible Memory: Nodes can be stored anywhere in memory.
 Foundation for Other Data Structures: Used in stacks, queues, graphs, etc.
 
