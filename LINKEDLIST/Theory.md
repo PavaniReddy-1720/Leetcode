@@ -28,7 +28,9 @@ Extra Memory: Each node requires additional memory for a pointer.
 Pointer Overhead: Managing pointers increases complexity.
 
     public class ListNode{
+    
       public int val;
+      
       public ListNode next;
 
       public ListNode(int x){
