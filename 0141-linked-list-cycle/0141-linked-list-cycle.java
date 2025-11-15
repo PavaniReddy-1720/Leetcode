@@ -38,7 +38,7 @@ public class Solution {
 
         while(slowptr!=null
             && fastptr!=null
-            &fastptr.next!=null){
+            && fastptr.next!=null){
 
                 slowptr=slowptr.next;
                 fastptr=fastptr.next.next;
