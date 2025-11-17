@@ -1,4 +1,4 @@
-https://www.geeksforgeeks.org/problems/implement-two-stacks-in-an-array/1
+//https://www.geeksforgeeks.org/problems/implement-two-stacks-in-an-array/1
 HOW IT WORKS
 Stack 1:
 grows from left → right
