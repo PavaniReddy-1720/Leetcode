@@ -1,4 +1,4 @@
-/*QUEUE IMPLEMENTATION FROM SCRATCH (Using Array)
+QUEUE IMPLEMENTATION FROM SCRATCH (Using Array)
 Operations:
 enqueue(x)
 dequeue()
@@ -6,7 +6,7 @@ peek()
 isEmpty()
 isFull()
 This uses front, rear, and circular array.
-*/
+
 Code:
 class MyQueue {
     int front, rear, size;
