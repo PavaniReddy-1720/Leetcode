@@ -11,6 +11,7 @@ Steps:
 2.Traverse again → rewrite the node values in sorted order
 This works because values are only 0,1,2.
 
+OPTIMAL APPROACH-> O(N)
 ✅ Approach 2: Create 3 separate linked lists (0-list, 1-list, 2-list)
 This keeps nodes intact, only rearranges pointers.
 Steps:
