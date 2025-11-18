@@ -1,3 +1,31 @@
+⭐ What is Integer.parseInt()?
+Integer.parseInt() is a Java method that converts a String → int.
+Example:
+int num = Integer.parseInt("123");
+
+Now num becomes:
+123  (as an int)
+
+⭐ How it works internally
+Integer.parseInt("123"):
+Reads each character: '1', '2', '3'
+Converts characters to digits
+Builds number:
+1 → 1
+2 → 1*10 + 2 = 12
+3 → 12*10 + 3 = 123
+
+
+Returns the int 123
+
+⭐ Common mistakes
+❌ Integer.parseInt("abc")
+This throws NumberFormatException
+(because "abc" is not a number)
+
+❌ Integer.parseInt("12a")
+Also throws exception.
+
 <h2><a href="https://leetcode.com/problems/evaluate-reverse-polish-notation/">150. Evaluate Reverse Polish Notation</a></h2><h3>Medium</h3><hr><p>You are given an array of strings <code>tokens</code> that represents an arithmetic expression in a <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation" target="_blank">Reverse Polish Notation</a>.</p>
 
 <p>Evaluate the expression. Return <em>an integer that represents the value of the expression</em>.</p>
