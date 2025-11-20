@@ -1,3 +1,4 @@
+APPROACH 1
 ####----------->USING RECURSION
 class Solution {
     public void reverseQueue(Queue<Integer> q) {
@@ -11,6 +12,7 @@ class Solution {
     }
 }
 
+APPROACH 2
 ####-------->USING STACK (using extra Space)
 class Solution {
     public void reverseQueue(Queue<Integer> q) {
