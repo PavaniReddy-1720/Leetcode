@@ -2,7 +2,9 @@ Reverse First K Elements of a Queue – Explanation
 Idea: 
 
 1.Remove the first K elements from the queue and push them into a stack → this reverses their order. 
+
 2.Pop all elements from the stack back into the queue. 
+
 3.Move the remaining (n – K) elements to the back to maintain the original order. 
 
 
