@@ -1,3 +1,11 @@
+/*
+Approach 1: Using Queue + Stack (Most Common)
+
+1. Do a normal level-order traversal using a queue.
+2. Instead of printing, push each visited node into a stack.
+3. But push right child first, then left child → so when stack is popped, order becomes left → right.*/
+
+
 class Solution {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
 
