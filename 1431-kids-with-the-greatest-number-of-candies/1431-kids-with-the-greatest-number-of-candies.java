@@ -1,16 +1,24 @@
+import java.util.*;
+
 class Solution {
     public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
-        int max=Math.max(candies);
-        int size=Math.size(candies);
-        Boolean TrackCandies=new boolean[size];
-        for (int i=0;i<size;i++){
-            if(candies[i]+extraCandies>=max){
-                TrackCandies[i]=true;
-            }
-            else{
-                TrackCandies[i]=false;
+
+        // 1. Find maximum candies
+        int max = candies[0];
+        for (int c : candies) {
+            if (c > max) {
+                max = c;
             }
         }
-        return TrackCandies; 
+
+        // 2. Result list
+        List<Boolean> result = new ArrayList<>();
+
+        // 3. Check each kid
+        for (int i = 0; i < candies.length; i++) {
+            result.add(candies[i] + extraCandies >= max);
+        }
+
+        return result;
     }
 }
