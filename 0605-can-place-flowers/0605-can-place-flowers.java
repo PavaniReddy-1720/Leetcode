@@ -1,3 +1,4 @@
+/** Pattern : Greedy + Array Traversal */
 class Solution {
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
         for (int i = 0; i < flowerbed.length; i++) {
