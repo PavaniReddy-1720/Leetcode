@@ -6,6 +6,7 @@ class Solution {
             int count = 0;
             int sum = 0;
 
+            // ONLY CHANGE IS HERE
             for (int i = 1; i * i <= n; i++) {
                 if (n % i == 0) {
                     count++;
@@ -20,9 +21,10 @@ class Solution {
                 if (count > 4) break;
             }
 
-            if (count == 4) ans += sum;
+            if (count == 4) {
+                ans += sum;
+            }
         }
-
         return ans;
     }
 }
