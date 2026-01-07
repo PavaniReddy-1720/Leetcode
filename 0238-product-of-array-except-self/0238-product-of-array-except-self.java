@@ -1,21 +1,45 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
-        
-        int size=nums.length;
-        int product=1;
-        int arr1[]=new int[size];
-        
-        for(int i=0;i<size;i++){
+//this uses only one extra array 
+        int n = nums.length;
+        int[] result = new int[n];
 
-            for(int j=0;j<size;j++){
-                if(i!=j){
-                    product=product*nums[j];
-                }
-            arr1[i]=product;
-        
-            }
-            product=1;
+       
+        result[0] = 1;
+        for (int i = 1; i < n; i++) {
+            result[i] = result[i - 1] * nums[i - 1];
         }
-        return arr1;
+
+
+        int rightProduct = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            result[i] = result[i] * rightProduct;
+            rightProduct = rightProduct * nums[i];
+        }
+
+        return result;
     }
 }
+/**
+//this uses two extra array left and right array and then multiplies both the arrays
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+
+        int n = nums.length;
+        int[] result = new int[n];
+
+        result[0] = 1;
+        for (int i = 1; i < n; i++) {
+            result[i] = result[i - 1] * nums[i - 1];
+        }
+
+        int rightProduct = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            result[i] = result[i] * rightProduct;
+            rightProduct = rightProduct * nums[i];
+        }
+
+        return result;
+    }
+}
+ */
