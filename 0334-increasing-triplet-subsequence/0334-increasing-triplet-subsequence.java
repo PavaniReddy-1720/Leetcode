@@ -1,10 +1,16 @@
 class Solution {
     public boolean increasingTriplet(int[] nums) {
-        for(int i=2;i<nums.length;i++){
-            if (nums[i-2]<nums[i-1]){
-                if(nums[i-1]<nums[i]){
-                    return true;
-                }
+        int first = Integer.MAX_VALUE;
+        int second = Integer.MAX_VALUE;
+
+        for (int num : nums) {
+            if (num <= first) {
+                first = num;          // smallest so far
+            } else if (num <= second) {
+                second = num;         // second smallest
+            } else {
+                // num > first and num > second
+                return true;
             }
         }
         return false;
