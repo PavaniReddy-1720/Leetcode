@@ -1,84 +1,97 @@
-class Solution {
+import java.util.*;
 
+class Solution {
     static class Event {
-        long x;
-        double y1, y2;
+        long y, x1, x2;
         int type;
-        Event(long x, double y1, double y2, int type) {
-            this.x = x;
-            this.y1 = y1;
-            this.y2 = y2;
-            this.type = type;
+        Event(long y, long x1, long x2, int type) {
+            this.y = y; this.x1 = x1; this.x2 = x2; this.type = type;
         }
     }
-
-    int[][] squares;
 
     public double separateSquares(int[][] squares) {
-        this.squares = squares;
-        double total = unionArea(1e18);
-        double target = total / 2.0;
-
-        double low = 0, high = 1e9;
-        for (int i = 0; i < 60; i++) {
-            double mid = (low + high) / 2;
-            if (unionArea(mid) < target) low = mid;
-            else high = mid;
-        }
-        return low;
-    }
-
-    private double unionArea(double mid) {
-        ArrayList<Event> events = new ArrayList<>();
-
+        List<Event> events = new ArrayList<>();
         for (int[] s : squares) {
             long x = s[0], y = s[1], l = s[2];
-            long top = y + l;
-            if (mid <= y) continue;
-            double y2 = Math.min(top, mid);
-            events.add(new Event(x, y, y2, 1));
-            events.add(new Event(x + l, y, y2, -1));
+            events.add(new Event(y, x, x + l, 1));
+            events.add(new Event(y + l, x, x + l, -1));
         }
 
-        events.sort((a, b) -> Long.compare(a.x, b.x));
-        TreeMap<Double, Integer> map = new TreeMap<>();
+        events.sort(Comparator.comparingLong(e -> e.y));
+        TreeMap<Long, Integer> map = new TreeMap<>();
 
-        long prevX = 0;
-        boolean first = true;
-        double area = 0;
+        List<Long> ys = new ArrayList<>();
+        List<Double> areaPrefix = new ArrayList<>();
+        double total = 0;
 
-        for (Event e : events) {
-            long curX = e.x;
-            if (!first) {
-                double width = curX - prevX;
-                double coverY = coveredLength(map);
-                area += width * coverY;
+        long prevY = events.get(0).y;
+        int i = 0;
+
+        while (i < events.size()) {
+            long curY = events.get(i).y;
+            long height = curY - prevY;
+            if (height > 0) {
+                double width = coveredX(map);
+                double area = width * height;
+                total += area;
+                ys.add(prevY);
+                areaPrefix.add(total);
             }
-            first = false;
 
-            int v1 = map.getOrDefault(e.y1, 0) + e.type;
-            if (v1 == 0) map.remove(e.y1);
-            else map.put(e.y1, v1);
+            while (i < events.size() && events.get(i).y == curY) {
+                Event e = events.get(i++);
+                int v = map.getOrDefault(e.x1, 0) + e.type;
+                if (v == 0) map.remove(e.x1);
+                else map.put(e.x1, v);
 
-            int v2 = map.getOrDefault(e.y2, 0) - e.type;
-            if (v2 == 0) map.remove(e.y2);
-            else map.put(e.y2, v2);
-
-            prevX = curX;
+                int v2 = map.getOrDefault(e.x2, 0) - e.type;
+                if (v2 == 0) map.remove(e.x2);
+                else map.put(e.x2, v2);
+            }
+            prevY = curY;
         }
-        return area;
+
+        double half = total / 2.0;
+
+        // Binary search on prefix slabs
+        int lo = 0, hi = areaPrefix.size() - 1;
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (areaPrefix.get(mid) < half) lo = mid + 1;
+            else hi = mid;
+        }
+
+        double before = lo == 0 ? 0 : areaPrefix.get(lo - 1);
+        double need = half - before;
+        double width = coveredXAtY(events, ys.get(lo));
+        return ys.get(lo) + need / width;
     }
 
-    private double coveredLength(TreeMap<Double, Integer> map) {
+    private double coveredX(TreeMap<Long, Integer> map) {
         double res = 0;
-        int count = 0;
-        double prev = 0;
+        int cnt = 0;
+        long prev = 0;
         for (var e : map.entrySet()) {
-            double y = e.getKey();
-            if (count > 0) res += y - prev;
-            count += e.getValue();
-            prev = y;
+            long x = e.getKey();
+            if (cnt > 0) res += x - prev;
+            cnt += e.getValue();
+            prev = x;
         }
         return res;
+    }
+
+    private double coveredXAtY(List<Event> events, long y) {
+        TreeMap<Long, Integer> map = new TreeMap<>();
+        for (Event e : events) {
+            if (e.y > y) break;
+            int v = map.getOrDefault(e.x1, 0) + e.type;
+            if (v == 0) map.remove(e.x1);
+            else map.put(e.x1, v);
+
+            int v2 = map.getOrDefault(e.x2, 0) - e.type;
+            if (v2 == 0) map.remove(e.x2);
+            else map.put(e.x2, v2);
+        }
+        return coveredX(map);
     }
 }
